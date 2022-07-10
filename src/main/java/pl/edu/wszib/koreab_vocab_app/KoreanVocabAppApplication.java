@@ -2,12 +2,14 @@ package pl.edu.wszib.koreab_vocab_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-public class KoreabVocabAppApplication {
+@PropertySource("classpath:db.properties")
+public class KoreanVocabAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(KoreabVocabAppApplication.class, args);
+        SpringApplication.run(KoreanVocabAppApplication.class, args);
     }
 
 }

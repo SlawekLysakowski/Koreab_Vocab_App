@@ -12,9 +12,10 @@
     <artifactId>Koreab_Vocab_App</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Koreab_Vocab_App</name>
+    <packaging>jar</packaging>
     <description>Koreab_Vocab_App</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>8</java.version>
     </properties>
     <dependencies>
         <dependency>
