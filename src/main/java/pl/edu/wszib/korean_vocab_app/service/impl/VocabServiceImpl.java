@@ -1,11 +1,11 @@
-package pl.edu.wszib.koreab_vocab_app.service.impl;
+package pl.edu.wszib.korean_vocab_app.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import pl.edu.wszib.koreab_vocab_app.dao.VocabDao;
-import pl.edu.wszib.koreab_vocab_app.model.Vocab;
-import pl.edu.wszib.koreab_vocab_app.service.VocabService;
+import pl.edu.wszib.korean_vocab_app.dao.VocabDao;
+import pl.edu.wszib.korean_vocab_app.model.Vocab;
+import pl.edu.wszib.korean_vocab_app.service.VocabService;
 
 import java.util.ArrayList;
 

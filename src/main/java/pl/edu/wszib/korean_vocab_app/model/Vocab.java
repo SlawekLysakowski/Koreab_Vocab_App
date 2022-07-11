@@ -1,4 +1,4 @@
-package pl.edu.wszib.koreab_vocab_app.model;
+package pl.edu.wszib.korean_vocab_app.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

@@ -1,15 +1,13 @@
-package pl.edu.wszib.koreab_vocab_app.dao;
+package pl.edu.wszib.korean_vocab_app.dao;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.edu.wszib.koreab_vocab_app.model.Vocab;
+import pl.edu.wszib.korean_vocab_app.model.Vocab;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

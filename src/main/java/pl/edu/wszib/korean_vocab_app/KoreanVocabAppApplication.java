@@ -1,4 +1,4 @@
-package pl.edu.wszib.koreab_vocab_app;
+package pl.edu.wszib.korean_vocab_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
