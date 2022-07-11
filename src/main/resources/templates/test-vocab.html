@@ -3,77 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <title>test</title>
-<!--  <script type="text/javascript" th:src="@{/index.js}"></script>-->
-  <link  th:href="@{/styles.css}" rel="stylesheet">
+  <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
 <div id="container">
-<nav>
-  <a href="/test">home</a>
-  <a href="#">about</a>
-  <a href="/list">vocabulary list</a>
-  <a href="/new">Add vocab</a>
-</nav>
-<div class="app">
+  <nav>
+    <a href="/test">home</a>
+    <a href="/about">about</a>
+    <a href="/list">vocabulary list</a>
+    <a href="/new">Add vocab</a>
+  </nav>
+  <div class="app">
 
-  <div id="control-panel">
-    <p id="transDirection" class="panel-button">Translation: </p>
-    <button id="translation">JAP : KOR</button>
+    <div id="control-panel">
+      <p id="transDirection" class="panel-button">Translation: </p>
+      <button id="translation">JAP : KOR</button>
 
-    <button id="showVocabList" class="btn" onclick="location.href=`list`;">Show Vocabulary</button>
+      <button id="showVocabList" class="btn" onclick="location.href=`list`;">Show Vocabulary</button>
 
-    <p class="show-lang">Show English</p>
-    <input type="checkbox" id="show-english"
-           class="checkbox btn"/>
-    <label for="show-english" class="toggle">
-      <p class="onOff">OFF ON</p>
-    </label>
-    <p class="show-lang">Show Polish</p>
-    <input type="checkbox" id="show-polish"
-           class="checkbox btn"/>
-    <label for="show-polish" class="toggle">
-      <p class="onOff">OFF ON</p>
-    </label>
-    <p id="correct" class="nbr"></p>
-    <p id="wrong" class="nbr"></p>
-    <br>
-  </div>
+      <p class="show-lang">Show English</p>
+      <input type="checkbox" id="show-english"
+             class="checkbox btn"/>
+      <label for="show-english" class="toggle">
+        <p class="onOff">OFF ON</p>
+      </label>
+      <p class="show-lang">Show Polish</p>
+      <input type="checkbox" id="show-polish"
+             class="checkbox btn"/>
+      <label for="show-polish" class="toggle">
+        <p class="onOff">OFF ON</p>
+      </label>
+      <p id="correct" class="nbr"></p>
+      <p id="wrong" class="nbr"></p>
+      <br>
+    </div>
 
-  <div class="word-array-box">
+    <div class="word-array-box">
 
-    <p id="word-1"></p>
-    <p id="word-2"></p>
-    <p id="word-3" ></p>
-    <p id="word-4"></p>
-    <p id="word-5"></p>
-    <p id="word-6"></p>
-    <p id="word-7"></p>
-    <p id="word-8"></p>
-    <p id="word-9"></p>
-    <p id="word-10"></p>
-  </div>
+      <p id="word-1"></p>
+      <p id="word-2"></p>
+      <p id="word-3" ></p>
+      <p id="word-4"></p>
+      <p id="word-5"></p>
+      <p id="word-6"></p>
+      <p id="word-7"></p>
+      <p id="word-8"></p>
+      <p id="word-9"></p>
+      <p id="word-10"></p>
+    </div>
 
-  <div class="displayedWord">
-    <h1 id="current-display-word"></h1>
-    <p id=englishWord></p>
-    <p id=polishWord></p>
-  </div>
-  <div id="answer-box">
-    <input
-      id="enter-word"
-      type="text"
-      placeholder="Enter your answer"
-    >
-    <input id='check' type="button" value="Check">
+    <div class="displayedWord">
+      <h1 id="current-display-word"></h1>
+      <p id=englishWord></p>
+      <p id=polishWord></p>
+    </div>
+    <div id="answer-box">
+      <input
+        id="enter-word"
+        type="text"
+        placeholder="Enter your answer"
+      >
+      <input id='check' type="button" value="Check">
 
 
-  </div>
-  <div id="feedback-cont">
-    <h2 id="feedback"></h2>
-    <h2 id="answer"></h2>
-  </div>
+    </div>
+    <div id="feedback-cont">
+      <h2 id="feedback"></h2>
+      <h2 id="answer"></h2>
+    </div>
 
-  <script th:inline="javascript">
+    <script th:inline="javascript">
       'use strict';
       let japaneseWords = [[${japaneseWords}]];
       let koreanWords = [[${koreanWords}]];
@@ -261,7 +260,6 @@
         appSizing();
         hideShowLang('show-polish', 'polishWord');
         hideShowLang('show-english', 'englishWord');
-
       }
 
     </script>

@@ -99,7 +99,10 @@ public class VocabController {
         return "redirect:/list";
     }
 
-
+    @GetMapping("/about")
+    public String aboutView(Model model)  {
+        return "about";
+    }
 
 
 }
