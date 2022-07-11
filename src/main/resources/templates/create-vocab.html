@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New vocab</title>
+  <link  th:href="@{/styles.css}" rel="stylesheet">
+</head>
+<body>
+<div id="container">
+  <nav>
+    <a href="/test">home</a>
+    <a href="#">about</a>
+    <a href="/list">vocabulary list</a>
+    <a href="/new">Add vocab</a>
+  </nav>
+<form th:id="edit-form" th:method="POST" th:action="@{/new}" th:object="${newVocab}">
+
+  <div class="form-group" id="1">
+    <label id="jap-label" for="japanese">JAPANESE</label>
+      <input id="japanese" class="form-control" type="text" placeholder="JAPANESE" th:field="*{japanese}">
+
+  </div>
+  <div class="form-group" id="2">
+    <label id="kor-label" for="korean">KOREAN</label>
+    <input id="korean" class="form-control" type="text" placeholder="KOREAN" th:field="*{korean}">
+  </div>
+  <div class="form-group" id="3">
+    <label id="eng-label" for="english">ENGLISH</label>
+    <input id="english" class="form-control" type="text" placeholder="ENGLISH" th:field="*{english}">
+  </div>
+  <div class="form-group" id="4">
+    <label id="pol-label" for="polish">POLISH</label>
+    <input id="polish" class="form-control" type="text" placeholder="POLISH" th:field="*{polish}">
+  </div>
+<div class="form-group">
+  <input type="submit" class="form-control btn btn-primary" value="Create">
+  <input onclick='javascript:window.history.back()' value='Cancel' type='button' class="form-control btn btn-secondary" />
+</div>
+</form>
+  </div>
+</body>
+</html>

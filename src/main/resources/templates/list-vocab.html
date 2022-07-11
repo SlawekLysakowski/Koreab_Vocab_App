@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Vocabulary list</title>
+  <link  th:href="@{/styles.css}" rel="stylesheet">
+
+</head>
+<body>
+<div th:id="container" width="75%" border="1px solid black"  >
+<nav>
+  <a href="/test">home</a>
+  <a href="#">about</a>
+  <a href="/list">vocabulary list</a>
+  <a href="/new">Add vocab</a>
+</nav>
+
+  <table class="table" id="vocab-table" grid-column="2 / 4">
+    <tr>
+      <th align="center">ID</th>
+      <th align="center">Japanese</th>
+      <th align="center">Korean</th>
+      <th align="center">English</th>
+      <th align="center">Polish</th>
+    </tr>
+    <tr th:each="word : ${vocabs}">
+      <td th:text="${word.id}" align="center"></td>
+      <td th:text="${word.japanese}" align="center"></td>
+      <td th:text="${word.korean}" align="center"></td>
+      <td th:text="${word.english}" align="center"></td>
+      <td th:text="${word.polish}" align="center"></td>
+      <td>
+        <a class="btn btn-primary" th:href="@{/get(id=${word.id})}"  >Open</a>
+        <a class="btn btn-warning" th:href="@{/update(id=${word.id})}">Edit</a>
+        <a class="btn btn-danger" th:href="@{/delete(id=${word.id})}">Delete</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>
