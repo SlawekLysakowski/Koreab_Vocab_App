@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+<!--  <script type="text/javascript" th:src="@{/index.js}"></script>-->
+  <link  th:href="@{/styles.css}" rel="stylesheet">
+</head>
+<body>
+<div id="container">
+<nav>
+  <a href="/test">home</a>
+  <a href="#">about</a>
+  <a href="/list">vocabulary list</a>
+  <a href="/new">Add vocab</a>
+</nav>
+<div class="app">
+
+  <div id="control-panel">
+    <p id="transDirection" class="panel-button">Translation: </p>
+    <button id="translation">JAP : KOR</button>
+
+    <button id="showVocabList" class="btn" onclick="location.href=`list`;">Show Vocabulary</button>
+
+    <p class="show-lang">Show English</p>
+    <input type="checkbox" id="show-english"
+           class="checkbox btn"/>
+    <label for="show-english" class="toggle">
+      <p class="onOff">OFF ON</p>
+    </label>
+    <p class="show-lang">Show Polish</p>
+    <input type="checkbox" id="show-polish"
+           class="checkbox btn"/>
+    <label for="show-polish" class="toggle">
+      <p class="onOff">OFF ON</p>
+    </label>
+    <p id="correct" class="nbr"></p>
+    <p id="wrong" class="nbr"></p>
+    <br>
+  </div>
+
+  <div class="word-array-box">
+
+    <p id="word-1"></p>
+    <p id="word-2"></p>
+    <p id="word-3" ></p>
+    <p id="word-4"></p>
+    <p id="word-5"></p>
+    <p id="word-6"></p>
+    <p id="word-7"></p>
+    <p id="word-8"></p>
+    <p id="word-9"></p>
+    <p id="word-10"></p>
+  </div>
+
+  <div class="displayedWord">
+    <h1 id="current-display-word"></h1>
+    <p id=englishWord></p>
+    <p id=polishWord></p>
+  </div>
+  <div id="answer-box">
+    <input
+      id="enter-word"
+      type="text"
+      placeholder="Enter your answer"
+    >
+    <input id='check' type="button" value="Check">
+
+
+  </div>
+  <div id="feedback-cont">
+    <h2 id="feedback"></h2>
+    <h2 id="answer"></h2>
+  </div>
+
+  <script th:inline="javascript">
+      'use strict';
+      let japaneseWords = [[${japaneseWords}]];
+      let koreanWords = [[${koreanWords}]];
+      let englishWords = [[${englishWords}]];
+      let polishWords = [[${polishWords}]];
+
+      let wordsArray = [];
+      let highlightedWord;
+      let wordIndex;
+      let answerKor;
+      let answerJpy;
+      let answerKorArr = [];
+      let answerJpyArr = [];
+      let index;
+      let newRandomNumber;
+      let correctNbr = 0;
+      let wrongNbr = 0;
+      let japToKor = true;
+
+      document.getElementById('correct').textContent = `Correct answers: ${correctNbr}`;
+      document.getElementById('wrong').textContent = `Wrong answers:\u00A0 ${wrongNbr}`;
+      const displayedWord = document.querySelector('#current-display-word');
+
+      const newWordsArray = function (vocab) {
+        wordsArray = [...new Array(10)]
+          .map(() => vocab[Math.round(Math.random() * vocab.length)]);
+
+        updateWords();
+        document.getElementById(`word-1`).style.color = '#ff4800';
+        return wordsArray;
+      }
+
+      const newWord = function () {
+        newRandomNumber = Math.trunc(Math.random() * wordsArray.length);
+        let randomWord = wordsArray[newRandomNumber];
+        wordIndex = japToKor ? japaneseWords.indexOf(randomWord) : koreanWords.indexOf(randomWord);
+        document.getElementById('current-display-word').textContent = randomWord;
+        console.log(displayedWord.textContent.length)
+        if (displayedWord.textContent.length > 10) {
+          displayedWord.style.fontSize = `30px`;
+        } else {
+          displayedWord.style.fontSize = `40px`;
+        }
+        // console.log(displayedWord.style.fontSize);
+        answerKor = koreanWords[wordIndex];
+        answerJpy = japaneseWords[wordIndex];
+        vocToTrimmedVocArr( answerKor, answerKorArr);
+        vocToTrimmedVocArr(answerJpy, answerJpyArr);
+        document.getElementById('polishWord').textContent = polishWords[wordIndex];
+        document.getElementById('englishWord').textContent = englishWords[wordIndex];
+        document.getElementById("enter-word").value = "";
+        // console.log(wordsArray.indexOf(randomWord));
+        updateWords();
+        highlightedWord = document.getElementById(`word-${wordsArray.indexOf(randomWord) + 1}`).style.color = '#ff4800';
+      }
+
+
+      const updateWords = function () {
+        if (wordsArray.length === 0) {
+          document.querySelector('.word-array-box').style.height = '';
+          newWordsArray(japToKor ? japaneseWords : koreanWords);
+          appSizing();
+        }
+        wordsArray.forEach((word, i) => {
+
+          document.getElementById(`word-${i + 1}`).textContent = word;
+          document.getElementById(`word-${i + 1}`).style.color = '#495057';
+
+          if (wordsArray.length < 10) {
+            document.getElementById(`word-${wordsArray.length + 1}`).textContent = '';
+          }
+        })
+      }
+
+
+      const switchTransDir = function () {
+        japToKor = !japToKor;
+        document.getElementById('translation').textContent = japToKor ? `KOR : JAP` : 'JAP : KOR';
+        document.querySelector('.word-array-box').style.height = '';
+        newWordsArray(japToKor ? japaneseWords : koreanWords);
+        appSizing();
+        newWord();
+      }
+
+      document.getElementById('translation').addEventListener('click', switchTransDir);
+
+      const hideShowLang = function (selectedSwitch, word) {
+        document.getElementById(`${selectedSwitch}`).addEventListener("click", function () {
+          let display = document.getElementById(`${word}`);
+          display.style.display === "grid" ? display.style.display = "none" : display.style.display = "grid";
+        })
+      }
+
+
+      const correctAnswer = function () {
+        newWord();
+        correctNbr++;
+        document.getElementById('correct').textContent = `Correct answers: ${correctNbr}`;
+        document.getElementById('feedback').textContent = `Correct answer! 😊 Congratulations!🎉`;
+        setTimeout(function () {
+          document.getElementById('feedback').textContent = ``;
+        }, 2000);
+      };
+
+      const wrongAnswer = function () {
+        newWord();
+        ++wrongNbr;
+        document.getElementById('wrong').textContent = `Wrong answers: ${wrongNbr}`;
+        setTimeout(function () {
+          document.getElementById('feedback').textContent = ``;
+          document.getElementById('answer').textContent = ``;
+
+        }, 3500);
+      };
+
+      const vocToTrimmedVocArr = function (text, newArr) {
+        const arr = text.split(",");
+        arr.forEach(function (word, i, arr) {
+          newArr[i] = word.trim();
+        });
+      };
+
+
+      const checkAnswer = function () {
+        let input = document.getElementById("enter-word").value;
+        if (japToKor) {
+          if (input === answerKor || answerKorArr.includes(input) && input !== "") {
+            wordsArray.splice(index, 1);
+            updateWords();
+            correctAnswer();
+          } else {
+            document.getElementById('feedback').textContent =
+              `wrong answer! 😢 Correct answer was: `;
+            document.getElementById('answer').textContent = `${answerKor}`;
+            wrongAnswer();
+          }
+
+        }
+        if (!japToKor) {
+          if (input === answerJpy || answerJpyArr.includes(input) && input !== "") {
+            // wordsArray.splice(wordsArray.indexOf(wordsArray[newRandomNumber]));
+            wordsArray.splice(index, 1);
+            updateWords();
+            correctAnswer();
+            if (wordsArray.length === 0) newWordsArray(koreanWords);
+
+          } else {
+
+            document.getElementById('feedback').textContent =
+              `wrong answer! 😢 Correct answer was: `;
+            document.getElementById('answer').textContent = `${answerJpy}`;
+            wrongAnswer();
+          }
+        }
+      };
+
+      document.querySelector('#enter-word').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkAnswer();
+      });
+
+      document.querySelector('#check').addEventListener('click', checkAnswer);
+
+      const appSizing = function () {
+        const wordsDiv = document.querySelector('.word-array-box');
+        const wordsDivHeight = wordsDiv.scrollHeight;
+        const heightRatio = wordsDivHeight / visualViewport.height;
+
+        console.log(wordsDivHeight, heightRatio)
+        wordsDiv.style.height = `${wordsDivHeight}px`;
+
+        if (heightRatio > 0.80) {
+          wordsDiv.style.height = `80%`;
+          wordsDiv.style.fontSize = `23px`
+        }
+        if (heightRatio < 0.50) {
+          wordsDiv.style.height = `70%`;
+          wordsDiv.style.fontSize = `45px`
+        }
+
+      }
+
+      window.onload = function () {
+        newWordsArray(japaneseWords);
+        newWord();
+        appSizing();
+        hideShowLang('show-polish', 'polishWord');
+        hideShowLang('show-english', 'englishWord');
+
+      }
+
+    </script>
+  </div>
+</div>
+
+</body>
+</html>
