@@ -79,7 +79,6 @@
       let koreanWords = [[${koreanWords}]];
       let englishWords = [[${englishWords}]];
       let polishWords = [[${polishWords}]];
-
       let wordsArray = [];
       let highlightedWord;
       let wordIndex;
@@ -87,7 +86,6 @@
       let answerJpy;
       let answerKorArr = [];
       let answerJpyArr = [];
-      let index;
       let newRandomNumber;
       let correctNbr = 0;
       let wrongNbr = 0;
@@ -199,9 +197,10 @@
 
       const checkAnswer = function () {
         let input = document.getElementById("enter-word").value;
+        // console.log(`index = ${index}, wordIndex = ${wordIndex} newRandomNumber = ${newRandomNumber}`);
         if (japToKor) {
           if (input === answerKor || answerKorArr.includes(input) && input !== "") {
-            wordsArray.splice(index, 1);
+            wordsArray.splice(newRandomNumber, 1);
             updateWords();
             correctAnswer();
           } else {
@@ -214,8 +213,7 @@
         }
         if (!japToKor) {
           if (input === answerJpy || answerJpyArr.includes(input) && input !== "") {
-            // wordsArray.splice(wordsArray.indexOf(wordsArray[newRandomNumber]));
-            wordsArray.splice(index, 1);
+            wordsArray.splice(newRandomNumber, 1);
             updateWords();
             correctAnswer();
             if (wordsArray.length === 0) newWordsArray(koreanWords);
