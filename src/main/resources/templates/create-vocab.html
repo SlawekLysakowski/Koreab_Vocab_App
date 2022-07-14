@@ -14,23 +14,31 @@
     <a href="/new">Add vocab</a>
   </nav>
 <form th:id="edit-form" th:method="POST" th:action="@{/new}" th:object="${newVocab}">
-
-  <div class="form-group" id="1">
-    <label id="jap-label" for="japanese">JAPANESE</label>
-      <input id="japanese" class="form-control" type="text" placeholder="JAPANESE" th:field="*{japanese}">
-
+  <div class="form-group">
+    <label id="edit-id" class="form-control">    Additional meanings of each word must be separated by commas</label>
   </div>
   <div class="form-group" id="2">
-    <label id="kor-label" for="korean">KOREAN</label>
-    <input id="korean" class="form-control" type="text" placeholder="KOREAN" th:field="*{korean}">
+    <label id="jap-label" for="japanese">JAPANESE</label>
+      <input id="japanese" class="form-control" type="text" placeholder="JAPANESE" th:field="*{japanese}">
+    <div th:if="${#fields.hasErrors('japanese')}" th:errors="*{japanese}" class="alert alert-danger"></div>
   </div>
   <div class="form-group" id="3">
-    <label id="eng-label" for="english">ENGLISH</label>
-    <input id="english" class="form-control" type="text" placeholder="ENGLISH" th:field="*{english}">
+    <label id="kor-label" for="korean">KOREAN</label>
+    <input id="korean" class="form-control" type="text" placeholder="KOREAN" th:field="*{korean}">
+    <div th:if="${#fields.hasErrors('korean')}" th:errors="*{korean}" class="alert alert-danger"></div>
+
   </div>
   <div class="form-group" id="4">
+    <label id="eng-label" for="english">ENGLISH</label>
+    <input id="english" class="form-control" type="text" placeholder="ENGLISH" th:field="*{english}">
+    <div th:if="${#fields.hasErrors('english')}" th:errors="*{english}" class="alert alert-danger"></div>
+
+  </div>
+  <div class="form-group" id="5">
     <label id="pol-label" for="polish">POLISH</label>
     <input id="polish" class="form-control" type="text" placeholder="POLISH" th:field="*{polish}">
+    <div th:if="${#fields.hasErrors('polish')}" th:errors="*{polish}" class="alert alert-danger"></div>
+
   </div>
 <div class="form-group">
   <input type="submit" class="form-control btn btn-primary" value="Create">
@@ -38,5 +46,9 @@
 </div>
 </form>
   </div>
+<script th:inline="javascript">
+
+</script>
+
 </body>
 </html>

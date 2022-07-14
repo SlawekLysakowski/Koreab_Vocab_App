@@ -6,7 +6,7 @@
 
 </head>
 <body>
-<div th:id="container" width="75%" border="1px solid black"  >
+<div th:id="container" >
 <nav>
   <a href="/test">home</a>
   <a href="/about">about</a>
@@ -14,20 +14,21 @@
   <a href="/new">Add vocab</a>
 </nav>
 
-  <table class="table" id="vocab-table" grid-column="2 / 4">
+  <table class="table" id="vocab-table">
     <tr>
-      <th align="center">ID</th>
-      <th align="center">Japanese</th>
-      <th align="center">Korean</th>
-      <th align="center">English</th>
-      <th align="center">Polish</th>
+      <th >ID</th>
+      <th >Japanese</th>
+
+      <th >Korean</th>
+      <th >English</th>
+      <th >Polish</th>
     </tr>
     <tr th:each="word : ${vocabs}">
-      <td th:text="${word.id}" align="center"></td>
-      <td th:text="${word.japanese}" align="center"></td>
-      <td th:text="${word.korean}" align="center"></td>
-      <td th:text="${word.english}" align="center"></td>
-      <td th:text="${word.polish}" align="center"></td>
+      <td th:text="${word.id}"></td>
+      <td th:text="${word.japanese}"></td>
+      <td th:text="${word.korean}"></td>
+      <td th:text="${word.english}"></td>
+      <td th:text="${word.polish}"></td>
       <td>
         <a class="btn btn-primary" th:href="@{/get(id=${word.id})}"  >Open</a>
         <a class="btn btn-warning" th:href="@{/update(id=${word.id})}">Edit</a>

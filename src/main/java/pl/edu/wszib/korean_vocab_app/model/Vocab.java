@@ -1,7 +1,10 @@
 package pl.edu.wszib.korean_vocab_app.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "vocabs")
@@ -11,20 +14,23 @@ public class Vocab {
         @Column(name = "id", nullable = false)
         @GeneratedValue
         private Long id;
-
-        @NotBlank(message = "New Vocabulary must not be blank")
+        @Valid
+        @NotBlank(message = "Meaning in Japanese must be filled")
         @Column(name = "Japanese", nullable = false)
         private String japanese;
 
-        @NotBlank(message = "New Vocabulary must not be blank")
+        @Valid
+        @NotBlank(message = "Meaning in Korean must be filled")
         @Column(name = "Korean", nullable = false)
         private String korean;
 
-        @NotBlank(message = "New Vocabulary must not be blank")
+        @Valid
+        @NotBlank(message = "Meaning in English must be filled")
         @Column(name = "English", nullable = false)
         private String english;
 
-        @NotBlank(message = "New Vocabulary must not be blank")
+        @Valid
+        @NotBlank(message = "Meaning in Polish must be filled")
         @Column(name = "Polish", nullable = false)
         private String polish;
 
