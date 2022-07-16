@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import pl.edu.wszib.korean_vocab_app.exception.NotFoundException;
 import pl.edu.wszib.korean_vocab_app.model.Vocab;
 import pl.edu.wszib.korean_vocab_app.service.VocabService;
 
@@ -29,20 +28,25 @@ public class VocabController implements WebMvcConfigurer {
     VocabService vocabService;
 
     @GetMapping("/get")
-    public String getVocabView(@RequestParam Long id, Model model) throws NotFoundException ,ChangeSetPersister.NotFoundException {
-        model.addAttribute("vocab", vocabService.getVocab(id));
+    public String getVocabView(@RequestParam Long id, Model model) throws ChangeSetPersister.NotFoundException {
+        try {
+            model.addAttribute("vocab", vocabService.getVocab(id));
+        } catch  (ChangeSetPersister.NotFoundException e) {
+            e.printStackTrace();
+            return "404-vocab";
+        }
         return "get-vocab";
     }
 
 
     @GetMapping("/list")
-    public String getAllWordsView(Model model, Vocab vocab) throws ChangeSetPersister.NotFoundException {
+    public String getAllWordsView(Model model, Vocab vocab) {
         model.addAttribute("vocabs", vocabService.getAllVocabs());
         return "list-vocab";
     }
 
     @GetMapping("/test")
-    public String testView(Model model, Vocab vocab, VocabController controller) throws ChangeSetPersister.NotFoundException {
+    public String testView(Model model, Vocab vocab, VocabController controller) {
         ArrayList<Vocab> allVocabs = vocabService.getAllVocabs();
         int size = vocabService.getAllVocabs().size();
 
@@ -96,13 +100,18 @@ public class VocabController implements WebMvcConfigurer {
     }
 
     @PostMapping("/update")
-    public String updateVocab(@Valid Vocab updateVocab, BindingResult bindingResult, Model model) throws ChangeSetPersister.NotFoundException {
+    public String updateVocab(@Valid Vocab updateVocab, BindingResult bindingResult, Model model)  {
         if(bindingResult.hasErrors()) {
             model.addAttribute(updateVocab);
             model.addAttribute("org.springframework.validation.BindingResult.updateVocab", bindingResult);
-            return "update-vocab";
+            return "redirect:/update?id=" + updateVocab.getId();
         }
-        updateVocab = vocabService.updateVocab(updateVocab);
+        try {
+            updateVocab = vocabService.updateVocab(updateVocab);
+        } catch (ChangeSetPersister.NotFoundException e) {
+            e.printStackTrace();
+            return "redirect:/update?id=" + updateVocab.getId() ;
+        }
         return "redirect:/list";
     }
 
@@ -124,12 +133,8 @@ public class VocabController implements WebMvcConfigurer {
         return "about";
     }
 
-    @ExceptionHandler()
-    public String notFoundView() {
+    @GetMapping("/error")
+    public String errorView(Model model) {
         return "404-vocab";
     }
-
-
-
-
 }

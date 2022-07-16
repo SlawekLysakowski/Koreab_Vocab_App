@@ -15,7 +15,7 @@
     <a href="/new">Add vocab</a>
   </nav>
   <div id="edit-vocab">
-  <form th:id="edit-form" th:method="POST" th:action="@{/update(id=${updateVocab.id})}" th:object="${updateVocab}" enctype="multipart/form-data">
+  <form th:id="edit-form" th:method="POST" th:action="@{/update(id=${updateVocab.id})}" th:object="${updateVocab}">
     <div class="form-group" id="1">
       <label id="id-label" for="edit-id">ID</label>
       <input id="edit-id" class="form-control" type="text" th:field="*{id}" disabled>
@@ -23,31 +23,68 @@
     <div class="form-group" id="3">
       <label id="jap-label" for="japanese">JAPANESE</label>
       <input id="japanese" class="form-control" type="text" th:field="*{japanese}">
-      <div th:if="${#fields.hasErrors('japanese')}" th:errors="*{japanese}" class="alert alert-danger"></div>
-
+      <div  th:if="${#fields.hasErrors('japanese')}" th:errors="*{japanese}" class="alert-danger"></div>
+      <label id="alert-japanese" class="alert-danger"></label>
     </div>
     <div class="form-group" id="2">
       <label id="kor-label" for="korean">KOREAN</label>
       <input id="korean" class="form-control" type="text" th:field="*{korean}">
-      <div th:if="${#fields.hasErrors('korean')}" th:errors="*{korean}" class="alert alert-danger"></div>
+      <div th:if="${#fields.hasErrors('korean')}" th:errors="*{korean}" class="alert-danger"></div>
+      <label id="alert-korean" class="alert-danger"></label>
+
     </div>
     <div class="form-group" id="4">
       <label id="eng-label" for="english">ENGLISH</label>
       <input id="english" class="form-control" type="text" th:field="*{english}">
-      <div th:if="${#fields.hasErrors('english')}" th:errors="*{english}" class="alert alert-danger"></div>
+      <div th:if="${#fields.hasErrors('english')}" th:errors="*{english}" class="alert-danger"></div>
+      <label id="alert-english" class="alert-danger"></label>
+
     </div>
     <div class="form-group" id="5">
       <label id="pol-label" for="polish">POLISH</label>
       <input id="polish" class="form-control" type="text" th:field="*{polish}">
-      <div th:if="${#fields.hasErrors('polish')}" th:errors="*{polish}" class="alert alert-danger"></div>
+      <div th:if="${#fields.hasErrors('polish')}" th:errors="*{polish}" class="alert-danger"></div>
+      <label id="alert-polish" class="alert-danger"></label>
+
     </div>
     <div class="form-group" id="6">
-      <input type="submit" class="form-control btn btn-primary" value="Edit">
+      <input id="submit" type="submit" class="form-control btn btn-primary" value="Edit">
       <input onclick='javascript:window.history.back()' value='Cancel' type='button' class="form-control btn btn-secondary" />
     </div>
   </form>
 </div>
 </div>
+<script th:inline="javascript">
+  const inputJapanese = document.getElementById('japanese');
+  const inputKorean = document.getElementById('korean');
+  const inputEnglish = document.getElementById('english');
+  const inputPolish = document.getElementById('polish');
+
+  const emptyFormAlert = function (e) {
+
+    if (inputJapanese.value === '') {
+      e.preventDefault();
+      document.querySelector('#alert-japanese').textContent = "Cannot update Japanese to empty meaning";
+    }
+    if (inputKorean.value  === '') {
+      e.preventDefault();
+      document.querySelector('#alert-korean').textContent = "Cannot update Korean to empty meaning";
+    }
+    if (inputEnglish.value  === '') {
+      e.preventDefault();
+      document.querySelector('#alert-english').textContent = "Cannot update English to empty meaning";
+    }
+    if (inputPolish.value  === '') {
+      e.preventDefault();
+      document.querySelector('#alert-polish').textContent = "Cannot update Polish to empty meaning";
+    }
+  };
+  document.querySelector('#submit').addEventListener('click', emptyFormAlert);
+  document.querySelector('#submit').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') emptyFormAlert();
+  });
+</script>
+
 
 </body>
 </html>

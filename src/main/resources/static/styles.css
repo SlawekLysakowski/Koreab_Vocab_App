@@ -370,6 +370,21 @@ td {
   margin: 30px auto;
 }
 
+.alert-danger {
+  color: #f33c3c;
+  font-size: 20px;
+}
+
+#back-div {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+#back-btn {
+  display: grid;
+  grid-column: 3 / 4;
+}
+
 @media screen and (max-width: 900px) {
   #container {
     width: 100%;

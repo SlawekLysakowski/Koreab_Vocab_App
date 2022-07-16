@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Not Found</title>
+  <link  th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
 <div id="container">
@@ -13,7 +14,11 @@
     <a href="/new">Add vocab</a>
   </nav>
   <h2>Vocabulary not fond</h2>
-  <a class="btn btn-secondary" th:href="@{/list}">back</a>
+  <div class="form-group">
+    <input onclick='javascript:window.history.back()' value='back' type='button' class="form-control btn btn-primary" id="back-btn"/>
+    <a class="form-control btn btn-secondary" th:href="@{/list}">Vocabulary list</a>
   </div>
+
+</div>
 </body>
 </html>

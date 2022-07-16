@@ -2,7 +2,6 @@ package pl.edu.wszib.korean_vocab_app.service;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import pl.edu.wszib.korean_vocab_app.exception.NotFoundException;
 import pl.edu.wszib.korean_vocab_app.model.Vocab;
 
 import java.util.ArrayList;
