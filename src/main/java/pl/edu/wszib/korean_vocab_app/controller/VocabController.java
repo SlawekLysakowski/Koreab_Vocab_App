@@ -94,8 +94,12 @@ public class VocabController implements WebMvcConfigurer {
 
     @GetMapping("/update")
     public String updateVocabView(@RequestParam Long id, Model model) throws ChangeSetPersister.NotFoundException {
-
-        model.addAttribute("updateVocab", vocabService.getVocab(id));
+        try {
+            model.addAttribute("updateVocab", vocabService.getVocab(id));
+        } catch  (ChangeSetPersister.NotFoundException e) {
+            e.printStackTrace();
+            return "404-vocab";
+        }
         return "update-vocab";
     }
 

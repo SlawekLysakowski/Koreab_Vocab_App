@@ -3,8 +3,6 @@ package pl.edu.wszib.korean_vocab_app.model;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "vocabs")

@@ -66,7 +66,6 @@
       >
       <input id='check' type="button" value="Check">
 
-
     </div>
     <div id="feedback-cont">
       <h2 id="feedback"></h2>
@@ -109,7 +108,7 @@
         let randomWord = wordsArray[newRandomNumber];
         wordIndex = japToKor ? japaneseWords.indexOf(randomWord) : koreanWords.indexOf(randomWord);
         document.getElementById('current-display-word').textContent = randomWord;
-        console.log(displayedWord.textContent.length)
+        // console.log(displayedWord.textContent.length)
         if (displayedWord.textContent.length > 10) {
           displayedWord.style.fontSize = `30px`;
         } else {
@@ -136,7 +135,6 @@
           appSizing();
         }
         wordsArray.forEach((word, i) => {
-
           document.getElementById(`word-${i + 1}`).textContent = word;
           document.getElementById(`word-${i + 1}`).style.color = '#495057';
 
@@ -148,8 +146,9 @@
 
 
       const switchTransDir = function () {
-        japToKor = !japToKor;
         document.getElementById('translation').textContent = japToKor ? `KOR : JAP` : 'JAP : KOR';
+        japToKor = !japToKor;
+        console.log(japToKor);
         document.querySelector('.word-array-box').style.height = '';
         newWordsArray(japToKor ? japaneseWords : koreanWords);
         appSizing();
@@ -164,7 +163,6 @@
           display.style.display === "grid" ? display.style.display = "none" : display.style.display = "grid";
         })
       }
-
 
       const correctAnswer = function () {
         newWord();
@@ -239,7 +237,7 @@
         const wordsDivHeight = wordsDiv.scrollHeight;
         const heightRatio = wordsDivHeight / visualViewport.height;
 
-        console.log(wordsDivHeight, heightRatio)
+        // console.log(wordsDivHeight, heightRatio)
         wordsDiv.style.height = `${wordsDivHeight}px`;
 
         if (heightRatio > 0.80) {
@@ -250,7 +248,6 @@
           wordsDiv.style.height = `70%`;
           wordsDiv.style.fontSize = `45px`
         }
-
       }
 
       window.onload = function () {
